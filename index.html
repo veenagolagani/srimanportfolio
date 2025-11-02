@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srimannarayana Nadakuditi - Mechanical Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(0, 174, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 174, 255, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #00aeff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00aeff, #0066ff);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #00aeff, #0066ff, #00ffcc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 174, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(0, 174, 255, 0.8)); }
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: #00aeff;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            flex: 0 0 300px;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #00aeff;
+            box-shadow: 0 0 40px rgba(0, 174, 255, 0.5);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #b0b0b0;
+        }
+
+        .contact-item::before {
+            content: '●';
+            color: #00aeff;
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            color: #00aeff;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #00aeff, #0066ff);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, #00aeff, #0066ff);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 3px solid #00aeff;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px rgba(0, 174, 255, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -51px;
+            top: 2rem;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #00aeff;
+            border: 3px solid #0a0a0a;
+        }
+
+        .timeline-item h3 {
+            color: #00aeff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 174, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #00aeff;
+            box-shadow: 0 20px 40px rgba(0, 174, 255, 0.3);
+        }
+
+        .skill-card h3 {
+            color: #00aeff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 174, 255, 0.1);
+            border: 1px solid rgba(0, 174, 255, 0.3);
+            border-radius: 20px;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 174, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 174, 255, 0.2);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #00aeff;
+            box-shadow: 0 20px 60px rgba(0, 174, 255, 0.3);
+        }
+
+        .project-card h3 {
+            color: #00aeff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .project-card li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .project-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00aeff;
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border-left: 4px solid #00aeff;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .education-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        .education-card h3 {
+            color: #00aeff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .institution {
+            color: #b0b0b0;
+            margin-bottom: 0.3rem;
+        }
+
+        .grade {
+            font-size: 2rem;
+            color: #00aeff;
+            font-weight: bold;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .strength-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 174, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .strength-item:hover {
+            background: rgba(0, 174, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .strength-item::before {
+            content: '✦';
+            display: block;
+            font-size: 2rem;
+            color: #00aeff;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 2rem;
+            text-align: center;
+            color: #888;
+            border-top: 1px solid rgba(0, 174, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { flex-direction: column-reverse; text-align: center; }
+            .hero-image { flex: 0 0 200px; }
+            .hero-image img { width: 200px; height: 200px; }
+            nav ul { flex-direction: column; gap: 1rem; }
+            .timeline { padding-left: 30px; }
+            .timeline::before { left: 10px; }
+            .timeline-item::before { left: -41px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>SRIMANNARAYANA NADAKUDITI</h1>
+                <h2>Mechanical Engineer</h2>
+                <p>Innovative mechanical engineering professional specializing in CAD design, thermal management systems, and aerospace component development. Passionate about creating cutting-edge solutions in electric vehicle technology and aerospace engineering.</p>
+                <div class="contact-info">
+                    <div class="contact-item">srimanmech9177@gmail.com</div>
+                    <div class="contact-item">+91-9177479409</div>
+                    <div class="contact-item">Vijayawada, India</div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="manpic.png" alt="Profile">
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div>
+                        <h3>Bachelor of Engineering - Mechanical Engineering</h3>
+                        <div class="institution">Vasireddy Venkatadri Institute of Technology</div>
+                        <div class="institution">JNTU Kakinada | 2025</div>
+                    </div>
+                    <div class="grade">7.86 CGPA</div>
+                </div>
+                <div class="education-card">
+                    <div>
+                        <h3>Diploma in Mechanical Engineering</h3>
+                        <div class="institution">Government Polytechnic Vijayawada</div>
+                        <div class="institution">JNTU Kakinada | 2022</div>
+                    </div>
+                    <div class="grade">70%</div>
+                </div>
+                <div class="education-card">
+                    <div>
+                        <h3>Secondary School Certificate (SSC)</h3>
+                        <div class="institution">H.M.K High School</div>
+                        <div class="institution">Board of Secondary Education | 2019</div>
+                    </div>
+                    <div class="grade">9.7 CGPA</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Magnum Wings</h3>
+                    <div class="date">September 2025 - Present</div>
+                    <p>Working with an advanced aerospace and engineering company specializing in unmanned aerial vehicles (UAVs), aerospace components, and lightweight composite structures. Involved in aerodynamics, precision manufacturing, and advanced simulation tools for structural and performance optimization.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Eleation CAD - CREO Training</h3>
+                    <div class="date">April 2025 - May 2025</div>
+                    <p>Completed comprehensive training in 3D CAD modeling using PTC Creo. Developed expertise in part modeling, assembly design, sheet metal, and drafting modules. Successfully completed multiple industrial design projects involving complex mechanical components and assemblies.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Eleation CAD - ANSYS Training</h3>
+                    <div class="date">April 2025 - May 2025</div>
+                    <p>Gained hands-on experience in Finite Element Analysis (FEA) using ANSYS Workbench. Performed structural, thermal, and static analysis of mechanical components. Specialized in meshing, boundary condition application, stress analysis, and thermal distribution predictions.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Lotus Microwave Technology</h3>
+                    <div class="date">January 2025 - April 2025</div>
+                    <p>Contributed to aerospace and defense projects as a CAD designer in R&D phases. Created detailed 3D models and technical drawings of components, systems, and assemblies for aircraft, spacecraft, and defense systems.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>RINL Vishakhapatnam</h3>
+                    <div class="date">June 2024 - July 2024</div>
+                    <p>Study project on Ash Handling System at Thermal Power Plant. Gained practical knowledge of ash management systems in captive power plants, focusing on efficient handling and disposal of combustion ash from coal-fired boilers.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Robotic Process Automation (RPA)</h3>
+                    <div class="date">June 2024 - July 2024</div>
+                    <p>Explored software technology using bots for automating repetitive, rule-based tasks including data entry, transaction processing, and report generation.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured Project</h2>
+            <div class="project-card">
+                <h3>Battery Thermal Management System Using Cold Plates in Electric Vehicles</h3>
+                <div class="date">8th Semester | April 2025</div>
+                <p style="margin: 1rem 0; line-height: 1.8;">Advanced thermal management solution for lithium-ion batteries in electric vehicles, investigating passive, active, and hybrid models based on thermal and hydraulic performance.</p>
+                <ul>
+                    <li><strong>Cold Plates:</strong> Designed heat exchangers as cooling interfaces to directly absorb and transfer heat from battery modules to coolant systems</li>
+                    <li><strong>Refrigerant System:</strong> Implemented FC-40 Fluorinert as working fluid in vapor compression systems for optimal heat absorption and transfer</li>
+                    <li><strong>Liquid Cooling:</strong> Utilized water as thermal transport medium through serpentine channels for efficient heat transfer from battery casing</li>
+                    <li><strong>Flow System:</strong> Engineered copper tube placement in serpentine channels for refrigerant and water flow optimization</li>
+                    <li><strong>Research Focus:</strong> Analyzed various phase change materials, refrigerant fluids, and their combinations based on material characteristics and performance metrics</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Design Software</h3>
+                    <div class="skill-tag">SolidWorks</div>
+                    <div class="skill-tag">CREO</div>
+                    <div class="skill-tag">CATIA</div>
+                    <div class="skill-tag">NX</div>
+                    <div class="skill-tag">ANSYS</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-tag">GD&T</div>
+                    <div class="skill-tag">Tolerance Analysis</div>
+                    <div class="skill-tag">Manufacturing Process</div>
+                    <div class="skill-tag">2D & 3D Drafting</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Software Tools</h3>
+                    <div class="skill-tag">MS Office</div>
+                    <div class="skill-tag">Microsoft Word</div>
+                    <div class="skill-tag">Project Management</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Languages</h3>
+                    <div class="skill-tag">English</div>
+                    <div class="skill-tag">Telugu</div>
+                    <div class="skill-tag">Hindi</div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 4rem;">Core Strengths</h2>
+            <div class="strengths-grid">
+                <div class="strength-item">Adaptability & Flexibility</div>
+                <div class="strength-item">Project Management</div>
+                <div class="strength-item">Team Collaboration</div>
+                <div class="strength-item">Enthusiastic Explorer</div>
+                <div class="strength-item">Hardworking</div>
+                <div class="strength-item">Goal-Oriented</div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 4rem;">Beyond Work</h2>
+            <div class="strengths-grid">
+                <div class="strength-item">🏐 Volleyball</div>
+                <div class="strength-item">♟️ Chess</div>
+                <div class="strength-item">✈️ Travelling</div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Srimannarayana Nadakuditi. All rights reserved.</p>
+        <p>Crafted with passion for innovation in mechanical engineering</p>
+    </footer>
+
+    <script>
+        // Particle background
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
